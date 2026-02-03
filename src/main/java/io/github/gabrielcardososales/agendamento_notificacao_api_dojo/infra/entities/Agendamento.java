@@ -1,11 +1,8 @@
 package io.github.gabrielcardososales.agendamento_notificacao_api_dojo.infra.entities;
 
-import io.github.gabrielcardososales.agendamento_notificacao_api_dojo.infra.enums.StatusNoficacaoEnum;
+import io.github.gabrielcardososales.agendamento_notificacao_api_dojo.infra.enums.StatusNotificacaoEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 public class Agendamento {
     @Id
@@ -22,7 +20,7 @@ public class Agendamento {
 
     private String emailDestinatario;
 
-    private String telefone;
+    private String telefoneDestinatario;
 
     private LocalDateTime dataHoraEnvio;
 
@@ -32,11 +30,11 @@ public class Agendamento {
 
     private String mensagem;
 
-    private StatusNoficacaoEnum statusNoficacao;
+    private StatusNotificacaoEnum statusNotificacao;
 
     @PrePersist
     private void prePersist(){
         dataHoraAgendamento = LocalDateTime.now();
-        statusNoficacao = StatusNoficacaoEnum.AGENDADO;
+        statusNotificacao = StatusNotificacaoEnum.AGENDADO;
     }
 }

@@ -6,10 +6,7 @@ import io.github.gabrielcardososales.agendamento_notificacao_api_dojo.controller
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -22,6 +19,12 @@ public class AgendamentoController {
     @PostMapping
     public ResponseEntity<AgendamentoRecordOut> gravarAgendamentos(@RequestBody AgendamentoRecord agendamentoRecord){
         log.info("Començando o processamento lindo aqui");
+
         return ResponseEntity.ok(service.gravarAgendamento(agendamentoRecord));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<AgendamentoRecordOut> buscarAgendammentoPorId(@PathVariable Long id){
+        return ResponseEntity.ok(service.buscarAgendamentosPorId(id));
     }
 }
