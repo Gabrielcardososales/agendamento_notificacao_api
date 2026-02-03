@@ -4,12 +4,20 @@ import io.github.gabrielcardososales.agendamento_notificacao_api_dojo.controller
 import io.github.gabrielcardososales.agendamento_notificacao_api_dojo.controller.dto.out.AgendamentoRecordOut;
 import io.github.gabrielcardososales.agendamento_notificacao_api_dojo.infra.entities.Agendamento;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
-import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
+@Mapper(
+        componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR
+)
 
-@Mapper(componentModel = SPRING)
 public interface IAgendamentoMapper {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dataHoraAgendamento", ignore = true)
+    @Mapping(target = "dataHoraModificacao", ignore = true)
+    @Mapping(target = "statusNotificacao", ignore = true)
     Agendamento paraEntidade(AgendamentoRecord agendamentoRecord);
 
     AgendamentoRecordOut paraOut(Agendamento agendamento);
